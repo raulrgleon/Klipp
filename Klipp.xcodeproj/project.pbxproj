@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10000000000000000000001 /* KlippApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000001 /* KlippApp.swift */; };
+		B10000000000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000002 /* AppDelegate.swift */; };
+		B10000000000000000000003 /* AppRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000003 /* AppRuntime.swift */; };
+		B10000000000000000000004 /* ClipboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* ClipboardItem.swift */; };
+		B10000000000000000000005 /* KeyCombo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000005 /* KeyCombo.swift */; };
+		B10000000000000000000006 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* AppSettings.swift */; };
+		B10000000000000000000007 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000007 /* ClipboardMonitor.swift */; };
+		B10000000000000000000008 /* PasteboardCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* PasteboardCapture.swift */; };
+		B10000000000000000000009 /* HistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000009 /* HistoryRepository.swift */; };
+		B10000000000000000000010 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000010 /* ImageStore.swift */; };
+		B10000000000000000000011 /* FuzzySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000011 /* FuzzySearch.swift */; };
+		B10000000000000000000012 /* ClipboardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000012 /* ClipboardStore.swift */; };
+		B10000000000000000000013 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000013 /* FloatingPanel.swift */; };
+		B10000000000000000000014 /* PanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000014 /* PanelController.swift */; };
+		B10000000000000000000015 /* HistoryPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000015 /* HistoryPanelView.swift */; };
+		B10000000000000000000016 /* HistoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000016 /* HistoryRowView.swift */; };
+		B10000000000000000000017 /* VisualEffectBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000017 /* VisualEffectBackground.swift */; };
+		B10000000000000000000030 /* HistoryPanelChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000030 /* HistoryPanelChrome.swift */; };
+		B10000000000000000000018 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000018 /* HotkeyManager.swift */; };
+		B10000000000000000000019 /* PasteSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000019 /* PasteSimulator.swift */; };
+		B10000000000000000000020 /* AccessibilityPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000020 /* AccessibilityPermission.swift */; };
+		B10000000000000000000021 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000021 /* SettingsView.swift */; };
+		B10000000000000000000029 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000029 /* SettingsWindowController.swift */; };
+		B10000000000000000000022 /* MenuBarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000022 /* MenuBarContent.swift */; };
+		B10000000000000000000031 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000031 /* StatusItemController.swift */; };
+		B10000000000000000000023 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000023 /* Assets.xcassets */; };
+		B10000000000000000000024 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000000000000000000024 /* Carbon.framework */; };
+		B10000000000000000000025 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000000000000000000025 /* ServiceManagement.framework */; };
+		B10000000000000000000026 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000000000000000000026 /* ApplicationServices.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000003 /* Klipp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Klipp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10000000000000000000001 /* KlippApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlippApp.swift; sourceTree = "<group>"; };
+		F10000000000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F10000000000000000000003 /* AppRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRuntime.swift; sourceTree = "<group>"; };
+		F10000000000000000000004 /* ClipboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardItem.swift; sourceTree = "<group>"; };
+		F10000000000000000000005 /* KeyCombo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCombo.swift; sourceTree = "<group>"; };
+		F10000000000000000000006 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		F10000000000000000000007 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
+		F10000000000000000000008 /* PasteboardCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardCapture.swift; sourceTree = "<group>"; };
+		F10000000000000000000009 /* HistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRepository.swift; sourceTree = "<group>"; };
+		F10000000000000000000010 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		F10000000000000000000011 /* FuzzySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzySearch.swift; sourceTree = "<group>"; };
+		F10000000000000000000012 /* ClipboardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardStore.swift; sourceTree = "<group>"; };
+		F10000000000000000000013 /* FloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanel.swift; sourceTree = "<group>"; };
+		F10000000000000000000014 /* PanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelController.swift; sourceTree = "<group>"; };
+		F10000000000000000000015 /* HistoryPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPanelView.swift; sourceTree = "<group>"; };
+		F10000000000000000000016 /* HistoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRowView.swift; sourceTree = "<group>"; };
+		F10000000000000000000017 /* VisualEffectBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectBackground.swift; sourceTree = "<group>"; };
+		F10000000000000000000030 /* HistoryPanelChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPanelChrome.swift; sourceTree = "<group>"; };
+		F10000000000000000000018 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
+		F10000000000000000000019 /* PasteSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteSimulator.swift; sourceTree = "<group>"; };
+		F10000000000000000000020 /* AccessibilityPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPermission.swift; sourceTree = "<group>"; };
+		F10000000000000000000021 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F10000000000000000000029 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		F10000000000000000000022 /* MenuBarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContent.swift; sourceTree = "<group>"; };
+		F10000000000000000000031 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
+		F10000000000000000000023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F10000000000000000000024 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		F10000000000000000000025 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		F10000000000000000000026 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		F10000000000000000000027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F10000000000000000000028 /* Klipp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Klipp.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C10000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000024 /* Carbon.framework in Frameworks */,
+				B10000000000000000000025 /* ServiceManagement.framework in Frameworks */,
+				B10000000000000000000026 /* ApplicationServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10000000000000000000001 /* Klipp */ = {
+			isa = PBXGroup;
+			children = (
+				G10000000000000000000010 /* App */,
+				G10000000000000000000011 /* Models */,
+				G10000000000000000000012 /* Clipboard */,
+				G10000000000000000000013 /* Persistence */,
+				G10000000000000000000014 /* Search */,
+				G10000000000000000000015 /* Store */,
+				G10000000000000000000016 /* Panel */,
+				G10000000000000000000017 /* Hotkey */,
+				G10000000000000000000018 /* Permissions */,
+				G10000000000000000000019 /* Settings */,
+				G10000000000000000000020 /* MenuBar */,
+				G10000000000000000000021 /* Resources */,
+			);
+			path = Klipp;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				G10000000000000000000001 /* Klipp */,
+				G10000000000000000000003 /* Frameworks */,
+				G10000000000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G10000000000000000000003 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000024 /* Carbon.framework */,
+				F10000000000000000000025 /* ServiceManagement.framework */,
+				F10000000000000000000026 /* ApplicationServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000003 /* Klipp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000010 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000001 /* KlippApp.swift */,
+				F10000000000000000000002 /* AppDelegate.swift */,
+				F10000000000000000000003 /* AppRuntime.swift */,
+				F10000000000000000000027 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000011 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000004 /* ClipboardItem.swift */,
+				F10000000000000000000005 /* KeyCombo.swift */,
+				F10000000000000000000006 /* AppSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000012 /* Clipboard */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000007 /* ClipboardMonitor.swift */,
+				F10000000000000000000008 /* PasteboardCapture.swift */,
+			);
+			path = Clipboard;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000013 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000009 /* HistoryRepository.swift */,
+				F10000000000000000000010 /* ImageStore.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000014 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000011 /* FuzzySearch.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000015 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000012 /* ClipboardStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000016 /* Panel */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000013 /* FloatingPanel.swift */,
+				F10000000000000000000014 /* PanelController.swift */,
+				F10000000000000000000015 /* HistoryPanelView.swift */,
+				F10000000000000000000016 /* HistoryRowView.swift */,
+				F10000000000000000000017 /* VisualEffectBackground.swift */,
+				F10000000000000000000030 /* HistoryPanelChrome.swift */,
+			);
+			path = Panel;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000017 /* Hotkey */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000018 /* HotkeyManager.swift */,
+				F10000000000000000000019 /* PasteSimulator.swift */,
+			);
+			path = Hotkey;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000018 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000020 /* AccessibilityPermission.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000019 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000021 /* SettingsView.swift */,
+				F10000000000000000000029 /* SettingsWindowController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000020 /* MenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000022 /* MenuBarContent.swift */,
+				F10000000000000000000031 /* StatusItemController.swift */,
+			);
+			path = MenuBar;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000021 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000023 /* Assets.xcassets */,
+				F10000000000000000000028 /* Klipp.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000000000000000000002 /* Klipp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C10000000000000000000011 /* Build configuration list for PBXNativeTarget "Klipp" */;
+			buildPhases = (
+				C10000000000000000000001 /* Sources */,
+				C10000000000000000000002 /* Frameworks */,
+				C10000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Klipp;
+			productName = Klipp;
+			productReference = A10000000000000000000003 /* Klipp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					A10000000000000000000002 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = C10000000000000000000010 /* Build configuration list for PBXProject "Klipp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = es;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				es,
+				Base,
+			);
+			mainGroup = G10000000000000000000002;
+			productRefGroup = G10000000000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000000000000000000002 /* Klipp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C10000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000023 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C10000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000001 /* KlippApp.swift in Sources */,
+				B10000000000000000000002 /* AppDelegate.swift in Sources */,
+				B10000000000000000000003 /* AppRuntime.swift in Sources */,
+				B10000000000000000000004 /* ClipboardItem.swift in Sources */,
+				B10000000000000000000005 /* KeyCombo.swift in Sources */,
+				B10000000000000000000006 /* AppSettings.swift in Sources */,
+				B10000000000000000000007 /* ClipboardMonitor.swift in Sources */,
+				B10000000000000000000008 /* PasteboardCapture.swift in Sources */,
+				B10000000000000000000009 /* HistoryRepository.swift in Sources */,
+				B10000000000000000000010 /* ImageStore.swift in Sources */,
+				B10000000000000000000011 /* FuzzySearch.swift in Sources */,
+				B10000000000000000000012 /* ClipboardStore.swift in Sources */,
+				B10000000000000000000013 /* FloatingPanel.swift in Sources */,
+				B10000000000000000000014 /* PanelController.swift in Sources */,
+				B10000000000000000000015 /* HistoryPanelView.swift in Sources */,
+				B10000000000000000000016 /* HistoryRowView.swift in Sources */,
+				B10000000000000000000017 /* VisualEffectBackground.swift in Sources */,
+				B10000000000000000000030 /* HistoryPanelChrome.swift in Sources */,
+				B10000000000000000000018 /* HotkeyManager.swift in Sources */,
+				B10000000000000000000019 /* PasteSimulator.swift in Sources */,
+				B10000000000000000000020 /* AccessibilityPermission.swift in Sources */,
+				B10000000000000000000021 /* SettingsView.swift in Sources */,
+				B10000000000000000000029 /* SettingsWindowController.swift in Sources */,
+				B10000000000000000000022 /* MenuBarContent.swift in Sources */,
+				B10000000000000000000031 /* StatusItemController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C10000000000000000000020 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C10000000000000000000021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C10000000000000000000022 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Klipp/Resources/Klipp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CNU4S77L2K;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Klipp/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klipp.Klipp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C10000000000000000000023 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Klipp/Resources/Klipp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CNU4S77L2K;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Klipp/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klipp.Klipp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C10000000000000000000010 /* Build configuration list for PBXProject "Klipp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C10000000000000000000020 /* Debug */,
+				C10000000000000000000021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C10000000000000000000011 /* Build configuration list for PBXNativeTarget "Klipp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C10000000000000000000022 /* Debug */,
+				C10000000000000000000023 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A10000000000000000000001 /* Project object */;
+}
