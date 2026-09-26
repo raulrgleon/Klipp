@@ -2,8 +2,9 @@ import AppKit
 import Foundation
 
 final class ClipboardMonitor {
-    var onCapture: ((CapturedContent) -> Void)?
+    var onCapture: ((PasteboardSnapshot) -> Void)?
     var isEnabled: Bool = true
+    var ignoredBundleIDs: () -> [String] = { [] }
 
     private var lastChangeCount: Int
     private var timer: Timer?
@@ -49,7 +50,13 @@ final class ClipboardMonitor {
         lastChangeCount = current
 
         if ignoreOwnWrites { return }
-        guard let captured = PasteboardCapture.capture(pasteboard) else { return }
-        onCapture?(captured)
+
+        let source = NSWorkspace.shared.frontmostApplication?.bundleIdentifier
+        if let source, ignoredBundleIDs().contains(source) {
+            return
+        }
+
+        guard let snapshot = PasteboardCapture.snapshot(pasteboard, sourceBundleID: source) else { return }
+        onCapture?(snapshot)
     }
 }

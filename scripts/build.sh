@@ -31,6 +31,7 @@ swiftc \
   -framework ApplicationServices \
   -framework Combine \
   -framework CryptoKit \
+  -lsqlite3 \
   -o "$MACOS/Klipp" \
   "${SRC[@]}"
 

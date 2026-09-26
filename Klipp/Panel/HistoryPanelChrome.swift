@@ -268,14 +268,21 @@ private final class HistoryCellView: NSTableCellView {
     }
 
     func configure(item: ClipboardItem, thumbnail: NSImage?, selected: Bool) {
-        titleLabel.stringValue = item.preview.isEmpty ? (item.kind == .image ? "Imagen" : "Texto") : item.preview
-        let kind = item.kind == .image ? "Imagen" : "Texto"
+        titleLabel.stringValue = item.preview.isEmpty ? item.kind.label : item.preview
+        let kind = item.kind.label
         let pin = item.isPinned ? " · anclado" : ""
         metaLabel.stringValue = kind + pin
         if let thumbnail {
             iconView.image = thumbnail
         } else {
-            iconView.image = NSImage(systemSymbolName: item.kind == .image ? "photo" : "doc.on.clipboard", accessibilityDescription: nil)
+            let symbol: String
+            switch item.kind {
+            case .image: symbol = "photo"
+            case .files: symbol = "doc"
+            case .richText: symbol = "doc.richtext"
+            case .text: symbol = "doc.on.clipboard"
+            }
+            iconView.image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)
         }
         pinButton.isHidden = !selected
         deleteButton.isHidden = !selected

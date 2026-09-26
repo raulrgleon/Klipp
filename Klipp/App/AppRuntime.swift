@@ -8,7 +8,7 @@ final class AppRuntime: ObservableObject {
 
     let settings: AppSettings
     let imageStore: ImageStore
-    let repository: HistoryRepository
+    let historyStore: HistoryStore
     let store: ClipboardStore
     let monitor: ClipboardMonitor
     let pasteSimulator: PasteSimulator
@@ -23,8 +23,8 @@ final class AppRuntime: ObservableObject {
     private init() {
         let settings = AppSettings()
         let imageStore = ImageStore()
-        let repository = HistoryRepository()
-        let store = ClipboardStore(repository: repository, settings: settings, imageStore: imageStore)
+        let historyStore = HistoryStore()
+        let store = ClipboardStore(historyStore: historyStore, settings: settings, imageStore: imageStore)
         let monitor = ClipboardMonitor(interval: 0.4)
         let pasteSimulator = PasteSimulator(store: store, monitor: monitor)
         let panelController = PanelController(store: store, pasteSimulator: pasteSimulator)
@@ -33,7 +33,7 @@ final class AppRuntime: ObservableObject {
 
         self.settings = settings
         self.imageStore = imageStore
-        self.repository = repository
+        self.historyStore = historyStore
         self.store = store
         self.monitor = monitor
         self.pasteSimulator = pasteSimulator
@@ -42,8 +42,9 @@ final class AppRuntime: ObservableObject {
         self.settingsWindow = settingsWindow
 
         monitor.isEnabled = settings.monitoringEnabled
-        monitor.onCapture = { [store] content in
-            store.ingest(content)
+        monitor.ignoredBundleIDs = { [settings] in settings.ignoredBundleIDs }
+        monitor.onCapture = { [store] snapshot in
+            store.ingest(snapshot)
         }
         hotkeyManager.onPressed = {
             AppRuntime.shared.panelController.toggle()
@@ -101,7 +102,7 @@ final class AppRuntime: ObservableObject {
     }
 
     func revealDataFolder() {
-        NSWorkspace.shared.open(repository.directory)
+        NSWorkspace.shared.open(historyStore.directory)
     }
 
     func openSettings() {

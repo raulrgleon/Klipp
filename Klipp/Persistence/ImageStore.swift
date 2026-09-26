@@ -6,7 +6,7 @@ final class ImageStore {
     private let cache = NSCache<NSString, NSImage>()
 
     init(baseDirectory: URL? = nil) {
-        let root = baseDirectory ?? HistoryRepository.defaultDirectory
+        let root = baseDirectory ?? AppPaths.supportDirectory
         imagesDirectory = root.appendingPathComponent("images", isDirectory: true)
         try? FileManager.default.createDirectory(at: imagesDirectory, withIntermediateDirectories: true)
         cache.countLimit = 80
@@ -16,8 +16,17 @@ final class ImageStore {
         imagesDirectory.appendingPathComponent(filename)
     }
 
-    func savePNG(_ data: Data, filename: String) throws {
+    func save(_ data: Data, filename: String) throws {
         try data.write(to: url(for: filename), options: .atomic)
+        cache.removeObject(forKey: filename as NSString)
+    }
+
+    func savePNG(_ data: Data, filename: String) throws {
+        try save(data, filename: filename)
+    }
+
+    func loadData(filename: String) -> Data? {
+        try? Data(contentsOf: url(for: filename))
     }
 
     func loadImage(filename: String) -> NSImage? {

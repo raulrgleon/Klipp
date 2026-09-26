@@ -69,7 +69,7 @@ final class PanelController: NSObject {
 
         let target = previousApp
         panel?.orderOut(nil)
-        pasteSimulator.pasteIntoPreviousApp(target)
+        pasteSimulator.pasteIntoPreviousApp(target, item: item)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
             self?.isPasting = false
         }

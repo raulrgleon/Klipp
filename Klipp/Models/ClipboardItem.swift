@@ -2,7 +2,24 @@ import Foundation
 
 enum ClipboardItemKind: String, Codable, Hashable {
     case text
+    case richText
     case image
+    case files
+
+    var label: String {
+        switch self {
+        case .text: return "Texto"
+        case .richText: return "Con formato"
+        case .image: return "Imagen"
+        case .files: return "Archivos"
+        }
+    }
+}
+
+struct ClipboardRepresentation: Hashable {
+    var type: String
+    var data: Data?
+    var filename: String?
 }
 
 struct ClipboardItem: Identifiable, Codable, Hashable {
@@ -46,7 +63,7 @@ struct ClipboardItem: Identifiable, Codable, Hashable {
 
     var searchableText: String {
         switch kind {
-        case .text:
+        case .text, .richText, .files:
             return text ?? preview
         case .image:
             return preview

@@ -16,21 +16,19 @@
 		B10000000000000000000007 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000007 /* ClipboardMonitor.swift */; };
 		B10000000000000000000008 /* PasteboardCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* PasteboardCapture.swift */; };
 		B10000000000000000000009 /* HistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000009 /* HistoryRepository.swift */; };
+		B10000000000000000000032 /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000032 /* HistoryStore.swift */; };
+		B10000000000000000000033 /* AppPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000033 /* AppPaths.swift */; };
 		B10000000000000000000010 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000010 /* ImageStore.swift */; };
 		B10000000000000000000011 /* FuzzySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000011 /* FuzzySearch.swift */; };
 		B10000000000000000000012 /* ClipboardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000012 /* ClipboardStore.swift */; };
 		B10000000000000000000013 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000013 /* FloatingPanel.swift */; };
 		B10000000000000000000014 /* PanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000014 /* PanelController.swift */; };
-		B10000000000000000000015 /* HistoryPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000015 /* HistoryPanelView.swift */; };
-		B10000000000000000000016 /* HistoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000016 /* HistoryRowView.swift */; };
-		B10000000000000000000017 /* VisualEffectBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000017 /* VisualEffectBackground.swift */; };
 		B10000000000000000000030 /* HistoryPanelChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000030 /* HistoryPanelChrome.swift */; };
 		B10000000000000000000018 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000018 /* HotkeyManager.swift */; };
 		B10000000000000000000019 /* PasteSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000019 /* PasteSimulator.swift */; };
 		B10000000000000000000020 /* AccessibilityPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000020 /* AccessibilityPermission.swift */; };
 		B10000000000000000000021 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000021 /* SettingsView.swift */; };
 		B10000000000000000000029 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000029 /* SettingsWindowController.swift */; };
-		B10000000000000000000022 /* MenuBarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000022 /* MenuBarContent.swift */; };
 		B10000000000000000000031 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000031 /* StatusItemController.swift */; };
 		B10000000000000000000023 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000023 /* Assets.xcassets */; };
 		B10000000000000000000024 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000000000000000000024 /* Carbon.framework */; };
@@ -49,21 +47,19 @@
 		F10000000000000000000007 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
 		F10000000000000000000008 /* PasteboardCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardCapture.swift; sourceTree = "<group>"; };
 		F10000000000000000000009 /* HistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRepository.swift; sourceTree = "<group>"; };
+		F10000000000000000000032 /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
+		F10000000000000000000033 /* AppPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPaths.swift; sourceTree = "<group>"; };
 		F10000000000000000000010 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		F10000000000000000000011 /* FuzzySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzySearch.swift; sourceTree = "<group>"; };
 		F10000000000000000000012 /* ClipboardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardStore.swift; sourceTree = "<group>"; };
 		F10000000000000000000013 /* FloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanel.swift; sourceTree = "<group>"; };
 		F10000000000000000000014 /* PanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelController.swift; sourceTree = "<group>"; };
-		F10000000000000000000015 /* HistoryPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPanelView.swift; sourceTree = "<group>"; };
-		F10000000000000000000016 /* HistoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRowView.swift; sourceTree = "<group>"; };
-		F10000000000000000000017 /* VisualEffectBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectBackground.swift; sourceTree = "<group>"; };
 		F10000000000000000000030 /* HistoryPanelChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPanelChrome.swift; sourceTree = "<group>"; };
 		F10000000000000000000018 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
 		F10000000000000000000019 /* PasteSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteSimulator.swift; sourceTree = "<group>"; };
 		F10000000000000000000020 /* AccessibilityPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPermission.swift; sourceTree = "<group>"; };
 		F10000000000000000000021 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F10000000000000000000029 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
-		F10000000000000000000022 /* MenuBarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContent.swift; sourceTree = "<group>"; };
 		F10000000000000000000031 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
 		F10000000000000000000023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F10000000000000000000024 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -167,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				F10000000000000000000009 /* HistoryRepository.swift */,
+				F10000000000000000000032 /* HistoryStore.swift */,
+				F10000000000000000000033 /* AppPaths.swift */,
 				F10000000000000000000010 /* ImageStore.swift */,
 			);
 			path = Persistence;
@@ -193,9 +191,6 @@
 			children = (
 				F10000000000000000000013 /* FloatingPanel.swift */,
 				F10000000000000000000014 /* PanelController.swift */,
-				F10000000000000000000015 /* HistoryPanelView.swift */,
-				F10000000000000000000016 /* HistoryRowView.swift */,
-				F10000000000000000000017 /* VisualEffectBackground.swift */,
 				F10000000000000000000030 /* HistoryPanelChrome.swift */,
 			);
 			path = Panel;
@@ -230,7 +225,6 @@
 		G10000000000000000000020 /* MenuBar */ = {
 			isa = PBXGroup;
 			children = (
-				F10000000000000000000022 /* MenuBarContent.swift */,
 				F10000000000000000000031 /* StatusItemController.swift */,
 			);
 			path = MenuBar;
@@ -324,21 +318,19 @@
 				B10000000000000000000007 /* ClipboardMonitor.swift in Sources */,
 				B10000000000000000000008 /* PasteboardCapture.swift in Sources */,
 				B10000000000000000000009 /* HistoryRepository.swift in Sources */,
+				B10000000000000000000032 /* HistoryStore.swift in Sources */,
+				B10000000000000000000033 /* AppPaths.swift in Sources */,
 				B10000000000000000000010 /* ImageStore.swift in Sources */,
 				B10000000000000000000011 /* FuzzySearch.swift in Sources */,
 				B10000000000000000000012 /* ClipboardStore.swift in Sources */,
 				B10000000000000000000013 /* FloatingPanel.swift in Sources */,
 				B10000000000000000000014 /* PanelController.swift in Sources */,
-				B10000000000000000000015 /* HistoryPanelView.swift in Sources */,
-				B10000000000000000000016 /* HistoryRowView.swift in Sources */,
-				B10000000000000000000017 /* VisualEffectBackground.swift in Sources */,
 				B10000000000000000000030 /* HistoryPanelChrome.swift in Sources */,
 				B10000000000000000000018 /* HotkeyManager.swift in Sources */,
 				B10000000000000000000019 /* PasteSimulator.swift in Sources */,
 				B10000000000000000000020 /* AccessibilityPermission.swift in Sources */,
 				B10000000000000000000021 /* SettingsView.swift in Sources */,
 				B10000000000000000000029 /* SettingsWindowController.swift in Sources */,
-				B10000000000000000000022 /* MenuBarContent.swift in Sources */,
 				B10000000000000000000031 /* StatusItemController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

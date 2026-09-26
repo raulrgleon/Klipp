@@ -14,6 +14,7 @@ struct SettingsView: View {
     @ObservedObject private var settings = AppRuntime.shared.settings
     @ObservedObject private var store = AppRuntime.shared.store
     @State private var tab: SettingsTab = .general
+    @State private var newBundleID = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -146,11 +147,12 @@ struct SettingsView: View {
             SettingsCard(title: "Almacenamiento local") {
                 SettingsFact(label: "Recortes", value: "\(store.items.count)")
                 SettingsFact(label: "Anclados", value: "\(store.items.filter(\.isPinned).count)")
+                SettingsFact(label: "Motor", value: "SQLite")
 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(verbatim: "Carpeta")
                         .foregroundStyle(.secondary)
-                    Text(verbatim: runtime.repository.directory.path)
+                    Text(verbatim: runtime.historyStore.directory.path)
                         .font(.system(size: 12, design: .monospaced))
                         .textSelection(.enabled)
                         .multilineTextAlignment(.leading)
@@ -165,6 +167,34 @@ struct SettingsView: View {
                     runtime.revealDataFolder()
                 } label: {
                     Text(verbatim: "Abrir carpeta en Finder")
+                }
+            }
+
+            SettingsCard(title: "No guardar desde estas apps") {
+                SettingsNote("Klipp no guarda lo que copies en gestores de contraseñas ni en las apps de esta lista.")
+                ForEach(settings.ignoredBundleIDs, id: \.self) { bundleID in
+                    HStack {
+                        Text(verbatim: bundleID)
+                            .font(.system(size: 12, design: .monospaced))
+                            .textSelection(.enabled)
+                        Spacer(minLength: 8)
+                        Button("Quitar") {
+                            settings.ignoredBundleIDs.removeAll { $0 == bundleID }
+                        }
+                    }
+                }
+                HStack {
+                    TextField("com.ejemplo.app", text: $newBundleID)
+                        .textFieldStyle(.roundedBorder)
+                    Button("Añadir") {
+                        let trimmed = newBundleID.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !trimmed.isEmpty, !settings.ignoredBundleIDs.contains(trimmed) else { return }
+                        settings.ignoredBundleIDs.append(trimmed)
+                        newBundleID = ""
+                    }
+                }
+                Button("Restablecer lista") {
+                    settings.ignoredBundleIDs = IgnoredApps.defaults
                 }
             }
 

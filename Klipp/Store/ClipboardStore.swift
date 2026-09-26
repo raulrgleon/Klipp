@@ -10,9 +10,12 @@ final class ClipboardStore: ObservableObject {
     @Published var selectedID: ClipboardItem.ID?
 
     let imageStore: ImageStore
-    private let repository: HistoryRepository
+    private let historyStore: HistoryStore
     private let settings: AppSettings
+    private var stored: [ClipboardItem] = []
     private var cancellables = Set<AnyCancellable>()
+    private let queue = DispatchQueue(label: "app.klipp.store", qos: .utility)
+    private let queueKey = DispatchSpecificKey<UInt8>()
 
     var visibleItems: [ClipboardItem] {
         FuzzySearch.filter(items, query: searchQuery)
@@ -22,107 +25,95 @@ final class ClipboardStore: ObservableObject {
         visibleItems.first(where: { $0.id == selectedID }) ?? visibleItems.first
     }
 
-    init(repository: HistoryRepository, settings: AppSettings, imageStore: ImageStore) {
-        self.repository = repository
+    init(historyStore: HistoryStore, settings: AppSettings, imageStore: ImageStore) {
+        self.historyStore = historyStore
         self.settings = settings
         self.imageStore = imageStore
-        items = Self.sanitize(repository.load(), imageStore: imageStore)
+        queue.setSpecific(key: queueKey, value: 1)
+
+        stored = historyStore.loadItems().filter { Self.isValid($0, imageStore: imageStore) }
+        items = stored
         selectedID = visibleItems.first?.id
 
         settings.$maxItems
             .dropFirst()
             .sink { [weak self] _ in
-                self?.evictIfNeeded()
-                self?.persist()
+                self?.queue.async {
+                    self?.evictIfNeeded()
+                    self?.publish()
+                }
             }
             .store(in: &cancellables)
     }
 
-    func ingest(_ captured: CapturedContent) {
-        let hash = captured.contentHash
-        if let index = items.firstIndex(where: { $0.contentHash == hash }) {
-            var existing = items.remove(at: index)
-            existing.lastCopiedAt = Date()
-            items.insert(existing, at: 0)
-            persist()
-            return
+    func ingest(_ snapshot: PasteboardSnapshot) {
+        queue.async { [weak self] in
+            self?.ingestOnQueue(snapshot)
         }
+    }
 
-        switch captured {
-        case .text(let text):
-            let item = ClipboardItem(
-                kind: .text,
-                text: text,
-                contentHash: hash,
-                preview: captured.preview,
-                byteSize: captured.byteSize
-            )
-            items.insert(item, at: 0)
-        case .image(let image, let pngData):
-            let id = UUID()
-            let filename = "\(id.uuidString).png"
-            let thumbName = "\(id.uuidString)-thumb.png"
-            do {
-                try imageStore.savePNG(pngData, filename: filename)
-                if let thumb = PasteboardCapture.thumbnailPNG(from: image) {
-                    try imageStore.savePNG(thumb, filename: thumbName)
-                }
-            } catch {
-                NSLog("Klipp: no se pudo guardar imagen (%@)", error.localizedDescription)
-                return
-            }
-            let item = ClipboardItem(
-                id: id,
-                kind: .image,
-                imageFilename: filename,
-                thumbnailFilename: imageStore.exists(filename: thumbName) ? thumbName : filename,
-                contentHash: hash,
-                preview: "Imagen",
-                byteSize: captured.byteSize
-            )
-            items.insert(item, at: 0)
+    func representations(for item: ClipboardItem) -> [ClipboardRepresentation] {
+        onStoreQueue {
+            self.historyStore.representations(for: item.id)
         }
+    }
 
-        evictIfNeeded()
-        persist()
+    func data(for representation: ClipboardRepresentation) -> Data? {
+        if let data = representation.data, !data.isEmpty {
+            return data
+        }
+        if let filename = representation.filename {
+            return imageStore.loadData(filename: filename)
+        }
+        return nil
     }
 
     func togglePin(_ id: ClipboardItem.ID) {
-        guard let index = items.firstIndex(where: { $0.id == id }) else { return }
-        items[index].isPinned.toggle()
-        persist()
+        queue.async { [weak self] in
+            guard let self, let index = self.stored.firstIndex(where: { $0.id == id }) else { return }
+            self.stored[index].isPinned.toggle()
+            self.historyStore.setPinned(id: id, isPinned: self.stored[index].isPinned)
+            self.publish()
+        }
     }
 
     func delete(_ id: ClipboardItem.ID) {
-        guard let index = items.firstIndex(where: { $0.id == id }) else { return }
-        let item = items.remove(at: index)
-        imageStore.delete(filename: item.imageFilename)
-        imageStore.delete(filename: item.thumbnailFilename)
-        if selectedID == id {
-            selectedID = visibleItems.first?.id
+        queue.async { [weak self] in
+            guard let self else { return }
+            self.stored.removeAll { $0.id == id }
+            let files = self.historyStore.delete(id: id)
+            files.forEach { self.imageStore.delete(filename: $0) }
+            self.publish { store in
+                if store.selectedID == id {
+                    store.selectedID = store.visibleItems.first?.id
+                }
+            }
         }
-        persist()
     }
 
     func clearUnpinned() {
-        let removed = items.filter { !$0.isPinned }
-        items.removeAll { !$0.isPinned }
-        for item in removed {
-            imageStore.delete(filename: item.imageFilename)
-            imageStore.delete(filename: item.thumbnailFilename)
+        queue.async { [weak self] in
+            guard let self else { return }
+            let removed = self.stored.filter { !$0.isPinned }
+            self.stored.removeAll { !$0.isPinned }
+            let files = self.historyStore.delete(ids: removed.map(\.id))
+            files.forEach { self.imageStore.delete(filename: $0) }
+            self.publish { store in
+                store.selectedID = store.visibleItems.first?.id
+            }
         }
-        selectedID = visibleItems.first?.id
-        persist()
     }
 
     func clearAll() {
-        for item in items {
-            imageStore.delete(filename: item.imageFilename)
-            imageStore.delete(filename: item.thumbnailFilename)
+        queue.async { [weak self] in
+            guard let self else { return }
+            self.stored = []
+            let files = self.historyStore.clearAll()
+            files.forEach { self.imageStore.delete(filename: $0) }
+            self.publish { store in
+                store.selectedID = nil
+            }
         }
-        items = []
-        selectedID = nil
-        persist()
     }
 
     func resetForPanel() {
@@ -154,6 +145,83 @@ final class ClipboardStore: ObservableObject {
         return imageStore.loadImage(filename: filename)
     }
 
+    private func ingestOnQueue(_ snapshot: PasteboardSnapshot) {
+        guard let captured = PasteboardCapture.process(snapshot) else { return }
+
+        if let index = stored.firstIndex(where: { $0.contentHash == captured.contentHash }) {
+            var existing = stored.remove(at: index)
+            existing.lastCopiedAt = Date()
+            stored.insert(existing, at: 0)
+            historyStore.touch(id: existing.id, lastCopiedAt: existing.lastCopiedAt)
+            publish()
+            return
+        }
+
+        let id = UUID()
+        var imageFilename: String?
+        var thumbFilename: String?
+
+        if let png = captured.displayPNG {
+            let name = "\(id.uuidString).png"
+            do {
+                try imageStore.save(png, filename: name)
+                imageFilename = name
+            } catch {
+                NSLog("Klipp: no se pudo guardar imagen (%@)", error.localizedDescription)
+            }
+        }
+        if let thumb = captured.thumbnailPNG {
+            let name = "\(id.uuidString)-thumb.png"
+            if (try? imageStore.save(thumb, filename: name)) != nil {
+                thumbFilename = name
+            }
+        }
+
+        let item = ClipboardItem(
+            id: id,
+            kind: captured.kind,
+            text: captured.text,
+            imageFilename: imageFilename,
+            thumbnailFilename: thumbFilename,
+            contentHash: captured.contentHash,
+            preview: captured.preview,
+            byteSize: captured.byteSize
+        )
+        let representations = persistRepresentations(id: id, captured: captured, imageFilename: imageFilename)
+        historyStore.upsert(item, representations: representations)
+        stored.insert(item, at: 0)
+        evictIfNeeded()
+        publish()
+    }
+
+    private func persistRepresentations(
+        id: UUID,
+        captured: CapturedPayload,
+        imageFilename: String?
+    ) -> [ClipboardRepresentation] {
+        var result: [ClipboardRepresentation] = []
+        for (index, pair) in captured.representations.enumerated() {
+            let type = pair.type
+            let data = pair.data
+            if let imageFilename, Self.isPNGType(type) {
+                result.append(ClipboardRepresentation(type: type, data: nil, filename: imageFilename))
+                continue
+            }
+            if Self.shouldStoreInFile(type: type, data: data) {
+                let name = "\(id.uuidString)-\(index).\(Self.fileExtension(for: type))"
+                do {
+                    try imageStore.save(data, filename: name)
+                    result.append(ClipboardRepresentation(type: type, data: nil, filename: name))
+                } catch {
+                    result.append(ClipboardRepresentation(type: type, data: data, filename: nil))
+                }
+            } else {
+                result.append(ClipboardRepresentation(type: type, data: data, filename: nil))
+            }
+        }
+        return result
+    }
+
     private func moveSelection(by offset: Int) {
         let visible = visibleItems
         guard !visible.isEmpty else {
@@ -175,31 +243,60 @@ final class ClipboardStore: ObservableObject {
 
     private func evictIfNeeded() {
         let limit = settings.maxItems
-        let victims = items
+        let victims = stored
             .filter { !$0.isPinned }
             .sorted { $0.lastCopiedAt < $1.lastCopiedAt }
         let overflow = victims.count - limit
         guard overflow > 0 else { return }
-        for item in victims.prefix(overflow) {
-            guard let index = items.firstIndex(where: { $0.id == item.id }) else { continue }
-            let removed = items.remove(at: index)
-            imageStore.delete(filename: removed.imageFilename)
-            imageStore.delete(filename: removed.thumbnailFilename)
+        let doomed = Array(victims.prefix(overflow))
+        let ids = Set(doomed.map(\.id))
+        stored.removeAll { ids.contains($0.id) }
+        let files = historyStore.delete(ids: doomed.map(\.id))
+        files.forEach { imageStore.delete(filename: $0) }
+    }
+
+    private func publish(then extra: ((ClipboardStore) -> Void)? = nil) {
+        let snapshot = stored
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.items = snapshot
+            extra?(self)
         }
     }
 
-    private func persist() {
-        repository.save(items)
+    private func onStoreQueue<T>(_ work: () -> T) -> T {
+        if DispatchQueue.getSpecific(key: queueKey) != nil {
+            return work()
+        }
+        return queue.sync(execute: work)
     }
 
-    private static func sanitize(_ items: [ClipboardItem], imageStore: ImageStore) -> [ClipboardItem] {
-        items.filter { item in
-            switch item.kind {
-            case .text:
-                return item.text?.isEmpty == false
-            case .image:
-                return imageStore.exists(filename: item.imageFilename)
-            }
+    private static func isValid(_ item: ClipboardItem, imageStore: ImageStore) -> Bool {
+        switch item.kind {
+        case .text, .richText, .files:
+            return item.text?.isEmpty == false || item.preview.isEmpty == false
+        case .image:
+            return imageStore.exists(filename: item.imageFilename)
         }
+    }
+
+    private static func isPNGType(_ type: String) -> Bool {
+        type == "public.png" || type == NSPasteboard.PasteboardType.png.rawValue
+    }
+
+    private static func shouldStoreInFile(type: String, data: Data) -> Bool {
+        if type.contains("png") || type.contains("tiff") || type.contains("jpeg") {
+            return true
+        }
+        return data.count > 64 * 1024
+    }
+
+    private static func fileExtension(for type: String) -> String {
+        if type.contains("tiff") { return "tiff" }
+        if type.contains("jpeg") { return "jpg" }
+        if type.contains("png") { return "png" }
+        if type.contains("rtf") { return "rtf" }
+        if type.contains("html") { return "html" }
+        return "bin"
     }
 }
